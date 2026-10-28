@@ -1,0 +1,65 @@
+@import "tailwindcss";
+@import "swiper/css";
+@import "swiper/css/navigation";
+@import "swiper/css/pagination";
+@import "swiper/css/effect-fade";
+
+@theme {
+  --color-primary: #1CA24B;
+  --color-primary-dark: #16843c;
+  --color-primary-light: #22c55e;
+}
+
+:root {
+  --primary-color: #1CA24B;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #fafafa;
+  color: #1e293b;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Minimalist Swiper Controls */
+.swiper-button-prev,
+.swiper-button-next {
+  color: #ffffff !important;
+  background-color: rgba(15, 23, 42, 0.45);
+  width: 40px !important;
+  height: 40px !important;
+  border-radius: 9999px;
+  backdrop-filter: blur(4px);
+  transition: all 0.2s ease;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.swiper-button-prev:after,
+.swiper-button-next:after {
+  font-size: 15px !important;
+  font-weight: 600;
+}
+
+.swiper-button-prev:hover,
+.swiper-button-next:hover {
+  background-color: #1CA24B !important;
+  border-color: #1CA24B !important;
+}
+
+.swiper-pagination-bullet {
+  background-color: #ffffff !important;
+  opacity: 0.5;
+  width: 8px !important;
+  height: 8px !important;
+  transition: all 0.25s ease;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: #1CA24B !important;
+  opacity: 1 !important;
+  width: 22px !important;
+  border-radius: 4px !important;
+}
