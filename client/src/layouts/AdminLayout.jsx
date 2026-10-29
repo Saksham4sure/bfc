@@ -41,7 +41,6 @@ const MENU_GROUPS = [
   {
     title: 'Configuration',
     items: [
-      { name: 'Dynamic Navbar', path: '/admin/navbar', icon: MenuIcon },
       { name: 'Site Settings', path: '/admin/settings', icon: Settings },
     ],
   },

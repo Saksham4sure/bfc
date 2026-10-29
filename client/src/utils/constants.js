@@ -14,37 +14,25 @@ export const COLLEGE_INFO = {
   themeColor: '#1CA24B',
 }
 
-export const DEFAULT_NAV_LINKS = [
-  { id: '1', label: 'Home', path: '/', order: 0 },
-  { id: '2', label: 'About Us', path: '/about', order: 1 },
+// Static, robust navigation links (Not dynamic as requested)
+export const STATIC_NAV_LINKS = [
+  { id: '1', label: 'Home', path: '/' },
+  { id: '2', label: 'About Us', path: '/about' },
   {
     id: '3',
-    label: 'Programs & Academics',
+    label: 'Academics',
     path: '/academics',
-    order: 2,
     children: [
-      { id: '3-1', label: 'School Level (Grades 1-10)', path: '/academics', description: 'Foundational secondary schooling' },
-      { id: '3-2', label: '+2 Science Stream', path: '/academics', description: 'Pre-medical & engineering' },
-      { id: '3-3', label: '+2 Management Stream', path: '/academics', description: 'Business & accountancy' },
-      { id: '3-4', label: '+2 Humanities & Law', path: '/academics', description: 'Jurisprudence & civic studies' },
+      { id: '3-1', label: 'School Level (Grades 1-10)', path: '/academics', description: 'Comprehensive foundational schooling' },
+      { id: '3-2', label: '+2 Science Stream', path: '/academics', description: 'Pre-medical & engineering excellence' },
+      { id: '3-3', label: '+2 Management Stream', path: '/academics', description: 'Business studies & accountancy' },
+      { id: '3-4', label: '+2 Humanities & Law', path: '/academics', description: 'Jurisprudence & civic leadership' },
     ],
   },
-  { id: '4', label: 'Admissions', path: '/admissions', order: 3 },
-  { id: '5', label: 'Notices', path: '/notices', order: 4 },
-  { id: '6', label: 'Campus Gallery', path: '/gallery', order: 5 },
-  { id: '7', label: 'Contact', path: '/contact', order: 6 },
+  { id: '4', label: 'Admissions', path: '/admissions' },
+  { id: '5', label: 'Notices & Events', path: '/notices' },
+  { id: '6', label: 'Campus Gallery', path: '/gallery' },
+  { id: '7', label: 'Contact', path: '/contact' },
 ]
 
-export const ADMIN_NAV_LINKS = [
-  { name: 'Dashboard', path: '/admin/dashboard', icon: 'LayoutDashboard' },
-  { name: 'Home Page', path: '/admin/pages/home', icon: 'Home' },
-  { name: 'About Us Page', path: '/admin/pages/about', icon: 'Info' },
-  { name: 'Academics Page', path: '/admin/pages/academics', icon: 'GraduationCap' },
-  { name: 'Admissions Page', path: '/admin/pages/admissions', icon: 'FileCheck' },
-  { name: 'Notices & News', path: '/admin/pages/notices', icon: 'Bell' },
-  { name: 'Photo Gallery', path: '/admin/pages/gallery', icon: 'Image' },
-  { name: 'Faculty & Staff', path: '/admin/pages/faculty', icon: 'Users' },
-  { name: 'Contact Page', path: '/admin/pages/contact', icon: 'Phone' },
-  { name: 'Dynamic Navbar', path: '/admin/navbar', icon: 'Menu' },
-  { name: 'Site Settings', path: '/admin/settings', icon: 'Settings' },
-]
+export const DEFAULT_NAV_LINKS = STATIC_NAV_LINKS

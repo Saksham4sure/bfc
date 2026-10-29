@@ -81,6 +81,7 @@ export default function EditHomePage() {
   })
 
   const [activeTab, setActiveTab] = useState('sliders')
+  const [layoutMode, setLayoutMode] = useState('wide') // 'wide' | 'split'
   const [saveSuccess, setSaveSuccess] = useState(false)
   const [showAddSlide, setShowAddSlide] = useState(false)
   const [showAddStory, setShowAddStory] = useState(false)
@@ -361,50 +362,87 @@ export default function EditHomePage() {
         </div>
       )}
 
-      {/* Section Tabs */}
-      <div className="flex flex-wrap gap-1.5 border-b border-zinc-200 pb-2">
-        {[
-          { id: 'sliders', label: 'Hero Sliders', icon: Layers, count: formData.heroSlides?.length },
-          { id: 'stories', label: 'Welcome Stories', icon: Sparkles, count: formData.welcomeStories?.length },
-          { id: 'stats', label: 'Key Statistics', icon: BarChart3, count: formData.stats?.length },
-          { id: 'pillars', label: 'Academic Pillars', icon: BookOpen, count: formData.aboutSection?.pillars?.length },
-          { id: 'notices', label: 'Notices Feed', icon: Bell },
-          { id: 'cta', label: 'CTA Banner', icon: Sparkles },
-        ].map((tab) => {
-          const Icon = tab.icon
-          const isActive = activeTab === tab.id
-          return (
-            <button
-              key={tab.id}
-              onClick={() => setActiveTab(tab.id)}
-              className={`inline-flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs font-medium transition-colors cursor-pointer ${
-                isActive
-                  ? 'bg-zinc-900 text-white'
-                  : 'text-zinc-600 hover:bg-zinc-100 hover:text-zinc-900'
-              }`}
-            >
-              <Icon className="w-3.5 h-3.5" />
-              <span>{tab.label}</span>
-              {tab.count !== undefined && (
-                <span
-                  className={`px-1.5 py-0.2 rounded text-[10px] ${
-                    isActive ? 'bg-zinc-800 text-zinc-300' : 'bg-zinc-100 text-zinc-600'
-                  }`}
-                >
-                  {tab.count}
-                </span>
-              )}
-            </button>
-          )
-        })}
+      {/* Section Tabs & Layout Mode Switcher */}
+      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-zinc-200 pb-2">
+        <div className="flex flex-wrap gap-1.5">
+          {[
+            { id: 'sliders', label: 'Hero Sliders', icon: Layers, count: formData.heroSlides?.length },
+            { id: 'stories', label: 'Welcome Stories', icon: Sparkles, count: formData.welcomeStories?.length },
+            { id: 'stats', label: 'Key Statistics', icon: BarChart3, count: formData.stats?.length },
+            { id: 'pillars', label: 'Academic Pillars', icon: BookOpen, count: formData.aboutSection?.pillars?.length },
+            { id: 'notices', label: 'Notices Feed', icon: Bell },
+            { id: 'cta', label: 'CTA Banner', icon: Sparkles },
+          ].map((tab) => {
+            const Icon = tab.icon
+            const isActive = activeTab === tab.id
+            return (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                className={`inline-flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs font-medium transition-colors cursor-pointer ${
+                  isActive
+                    ? 'bg-zinc-900 text-white'
+                    : 'text-zinc-600 hover:bg-zinc-100 hover:text-zinc-900'
+                }`}
+              >
+                <Icon className="w-3.5 h-3.5" />
+                <span>{tab.label}</span>
+                {tab.count !== undefined && (
+                  <span
+                    className={`px-1.5 py-0.2 rounded text-[10px] ${
+                      isActive ? 'bg-zinc-800 text-zinc-300' : 'bg-zinc-100 text-zinc-600'
+                    }`}
+                  >
+                    {tab.count}
+                  </span>
+                )}
+              </button>
+            )
+          })}
+        </div>
+
+        {/* Layout Switcher: Wide Desktop Rectangle vs Side-by-Side Split */}
+        <div className="flex items-center bg-zinc-100 p-0.5 rounded-lg border border-zinc-200 text-xs">
+          <button
+            onClick={() => setLayoutMode('wide')}
+            className={`px-3 py-1 rounded-md font-medium transition-colors cursor-pointer ${
+              layoutMode === 'wide'
+                ? 'bg-zinc-900 text-white shadow-xs font-semibold'
+                : 'text-zinc-600 hover:text-zinc-900'
+            }`}
+          >
+            Wide Rectangle
+          </button>
+          <button
+            onClick={() => setLayoutMode('split')}
+            className={`px-3 py-1 rounded-md font-medium transition-colors cursor-pointer ${
+              layoutMode === 'split'
+                ? 'bg-zinc-900 text-white shadow-xs font-semibold'
+                : 'text-zinc-600 hover:text-zinc-900'
+            }`}
+          >
+            Side-by-Side
+          </button>
+        </div>
       </div>
 
+      {/* Wide Rectangle Live Preview at Top (When in Wide Mode) */}
+      {layoutMode === 'wide' && (
+        <div className="w-full">
+          <LivePreviewPane
+            data={formData}
+            activeSection={previewSectionMap[activeTab] || 'hero'}
+            onSectionChange={(tabKey) => setActiveTab(tabKey)}
+          />
+        </div>
+      )}
+
       {/* -------------------------------------------------------------
-       * Two-Column Layout: Inputs on Left, Live Preview on Right
+       * Layout: Inputs on Left, Live Preview on Right (or full-width inputs when in wide mode)
        * ------------------------------------------------------------- */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-        {/* Left Column: Form Inputs (Col 1-7) */}
-        <div className="lg:col-span-6 xl:col-span-6 space-y-6">
+      <div className={layoutMode === 'wide' ? 'w-full' : 'grid grid-cols-1 lg:grid-cols-12 gap-8 items-start'}>
+        {/* Form Inputs Container */}
+        <div className={layoutMode === 'wide' ? 'w-full space-y-6' : 'lg:col-span-5 space-y-6'}>
           {/* TAB 1: Hero Sliders */}
           {activeTab === 'sliders' && (
             <div className="space-y-6">
@@ -1181,14 +1219,16 @@ export default function EditHomePage() {
           )}
         </div>
 
-        {/* Right Column: Sticky Live Preview Window (Col 7-12) */}
-        <div className="lg:col-span-6 xl:col-span-6">
-          <LivePreviewPane
-            data={formData}
-            activeSection={previewSectionMap[activeTab] || 'hero'}
-            onSectionChange={(tabKey) => setActiveTab(tabKey)}
-          />
-        </div>
+        {/* Right Column: Sticky Live Preview Window (Shown in Split Mode) */}
+        {layoutMode === 'split' && (
+          <div className="lg:col-span-7">
+            <LivePreviewPane
+              data={formData}
+              activeSection={previewSectionMap[activeTab] || 'hero'}
+              onSectionChange={(tabKey) => setActiveTab(tabKey)}
+            />
+          </div>
+        )}
       </div>
     </div>
   )

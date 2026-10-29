@@ -9,35 +9,17 @@ import {
   ArrowRight,
   MapPin,
 } from 'lucide-react'
-import { COLLEGE_INFO, DEFAULT_NAV_LINKS } from '../../utils/constants'
-import api from '../../services/api'
+import { COLLEGE_INFO, STATIC_NAV_LINKS } from '../../utils/constants'
 
 export default function Navbar() {
-  const [navItems, setNavItems] = useState(DEFAULT_NAV_LINKS)
   const [isOpen, setIsOpen] = useState(false)
   const [openDropdown, setOpenDropdown] = useState(null)
   const [mobileExpanded, setMobileExpanded] = useState({})
   const location = useLocation()
   const dropdownRef = useRef(null)
 
-  // Fetch dynamic navigation configured from admin panel
-  useEffect(() => {
-    let isMounted = true
-    async function fetchNav() {
-      try {
-        const response = await api.get('/nav')
-        if (isMounted && response?.data?.navItems?.length > 0) {
-          setNavItems(response.data.navItems)
-        }
-      } catch {
-        // Fallback to default structure
-      }
-    }
-    fetchNav()
-    return () => {
-      isMounted = false
-    }
-  }, [])
+  // Purely static navigation links (not dynamic)
+  const navItems = STATIC_NAV_LINKS
 
   // Close dropdowns on route changes
   useEffect(() => {

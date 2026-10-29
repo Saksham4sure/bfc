@@ -38,6 +38,7 @@ export default function AppRoutes() {
         <Route path="academics" element={<AcademicsPage />} />
         <Route path="admissions" element={<AdmissionsPage />} />
         <Route path="notices" element={<NoticesPage />} />
+        <Route path="events" element={<NoticesPage />} />
         <Route path="gallery" element={<GalleryPage />} />
         <Route path="contact" element={<ContactPage />} />
       </Route>
