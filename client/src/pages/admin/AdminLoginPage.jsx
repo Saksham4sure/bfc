@@ -1,8 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { GraduationCap, Lock, Mail, ArrowRight, AlertCircle } from 'lucide-react'
+import { Lock, Mail, ArrowRight, AlertCircle } from 'lucide-react'
 import { useAuth } from '../../context/AuthContext'
-import api from '../../services/api'
 
 export default function AdminLoginPage() {
   const [email, setEmail] = useState('')
@@ -18,48 +17,33 @@ export default function AdminLoginPage() {
     setLoading(true)
 
     try {
-      const response = await api.post('/auth/login', { email, password })
-      login(response.user, response.token)
+      await login(email, password)
       navigate('/admin/dashboard')
     } catch (err) {
-      // If database is offline or backend is unreachable, allow standard seed admin login
-      if (
-        (email === 'admin@brightfuture.edu.np' && password === 'admin123') ||
-        email.includes('admin')
-      ) {
-        login(
-          {
-            id: 'admin-seed-id',
-            name: 'Super Admin',
-            email: 'admin@brightfuture.edu.np',
-            role: 'SUPER_ADMIN',
-          },
-          'mock_admin_token_active'
-        )
-        navigate('/admin/dashboard')
-        return
-      }
-      setError(err.message || 'Invalid credentials. Please try again.')
+      setError(
+        err.response?.data?.message ||
+        'Authentication failed. Try admin@brightfuture.edu.np / admin123'
+      )
     } finally {
       setLoading(false)
     }
   }
 
   return (
-    <div className="min-h-screen bg-slate-950 flex items-center justify-center p-4">
-      <div className="max-w-md w-full bg-slate-900 border border-emerald-950/40 rounded-3xl p-8 shadow-2xl text-slate-100">
+    <div className="min-h-screen bg-zinc-950 flex items-center justify-center p-4">
+      <div className="max-w-md w-full bg-zinc-900 border border-zinc-800 rounded-2xl p-8 shadow-2xl text-zinc-100">
         <div className="text-center mb-8">
           <img
             src="/bfc.png"
             alt="BFC Logo"
-            className="w-16 h-16 object-contain rounded-2xl p-1 bg-white mx-auto mb-4 shadow-xl shadow-[#1CA24B]/30"
+            className="w-14 h-14 object-contain rounded-xl p-1 bg-white mx-auto mb-4 shadow-md"
           />
-          <h1 className="text-2xl font-black tracking-tight text-white">Bright Future CMS</h1>
-          <p className="text-emerald-400/80 text-xs mt-1">Admin &amp; Staff Dynamic Portal</p>
+          <h1 className="text-xl font-bold tracking-tight text-white">BFC Admin Portal</h1>
+          <p className="text-zinc-400 text-xs mt-1">Institutional Content Management</p>
         </div>
 
         {error && (
-          <div className="mb-6 p-3.5 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-xs flex items-center gap-2.5">
+          <div className="mb-6 p-3 rounded-lg bg-red-950/40 border border-red-800/60 text-red-300 text-xs flex items-center gap-2">
             <AlertCircle className="w-4 h-4 shrink-0" />
             <span>{error}</span>
           </div>
@@ -67,35 +51,35 @@ export default function AdminLoginPage() {
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-xs font-semibold text-slate-300 mb-1.5 uppercase">
+            <label className="block text-xs font-semibold text-zinc-300 mb-1.5 uppercase tracking-wider">
               Email Address
             </label>
             <div className="relative">
-              <Mail className="w-4 h-4 text-slate-500 absolute left-3.5 top-3.5" />
+              <Mail className="w-4 h-4 text-zinc-500 absolute left-3.5 top-1/2 -translate-y-1/2" />
               <input
                 type="email"
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="admin@brightfuture.edu.np"
-                className="w-full pl-10 pr-4 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-sm text-white placeholder-slate-500 focus:outline-none focus:border-[#1CA24B]"
+                className="w-full pl-10 pr-4 py-2.5 bg-zinc-950 border border-zinc-800 rounded-xl text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-zinc-500"
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-300 mb-1.5 uppercase">
+            <label className="block text-xs font-semibold text-zinc-300 mb-1.5 uppercase tracking-wider">
               Password
             </label>
             <div className="relative">
-              <Lock className="w-4 h-4 text-slate-500 absolute left-3.5 top-3.5" />
+              <Lock className="w-4 h-4 text-zinc-500 absolute left-3.5 top-1/2 -translate-y-1/2" />
               <input
                 type="password"
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder="••••••••••••"
-                className="w-full pl-10 pr-4 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-sm text-white placeholder-slate-500 focus:outline-none focus:border-[#1CA24B]"
+                placeholder="••••••••"
+                className="w-full pl-10 pr-4 py-2.5 bg-zinc-950 border border-zinc-800 rounded-xl text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-zinc-500"
               />
             </div>
           </div>
@@ -103,15 +87,15 @@ export default function AdminLoginPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-3 rounded-xl bg-[#1CA24B] hover:bg-[#16843c] disabled:opacity-50 text-white font-bold text-sm flex items-center justify-center gap-2 shadow-lg shadow-[#1CA24B]/30 transition-all cursor-pointer mt-3"
+            className="w-full py-2.5 rounded-xl bg-white hover:bg-zinc-200 disabled:opacity-50 text-zinc-950 font-bold text-sm flex items-center justify-center gap-2 transition-colors cursor-pointer mt-4"
           >
-            {loading ? 'Authenticating...' : 'Sign In to Portal'}
-            {!loading && <ArrowRight className="w-4 h-4" />}
+            <span>{loading ? 'Authenticating...' : 'Sign In to Portal'}</span>
+            <ArrowRight className="w-4 h-4" />
           </button>
         </form>
 
-        <div className="mt-8 text-center text-xs text-slate-500">
-          Protected Administrative Area &bull; Bright Future School/College
+        <div className="mt-8 pt-4 border-t border-zinc-800/80 text-center text-xs text-zinc-500">
+          Default credentials: admin@brightfuture.edu.np / admin123
         </div>
       </div>
     </div>

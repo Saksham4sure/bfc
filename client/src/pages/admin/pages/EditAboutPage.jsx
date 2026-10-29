@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import {
   Info,
-  Eye,
   Target,
   CheckCircle2,
   Plus,
@@ -54,40 +53,37 @@ export default function EditAboutPage() {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 max-w-5xl">
       {/* Page Header Bar */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-6 rounded-2xl border border-slate-200 shadow-2xs">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-5 sm:p-6 rounded-2xl border border-zinc-200">
         <div>
-          <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#1CA24B]">
+          <div className="flex items-center gap-2 text-xs font-mono font-medium uppercase tracking-wider text-zinc-500">
             <span>Page CMS</span>
             <span>&bull;</span>
             <span>About Us</span>
           </div>
-          <h2 className="text-2xl font-extrabold text-slate-900 mt-1 flex items-center gap-2">
-            <span>About Page Content</span>
-            <span className="text-xs px-2.5 py-0.5 rounded-full bg-emerald-100 text-[#1CA24B] font-bold">
-              /about
-            </span>
+          <h2 className="text-xl sm:text-2xl font-bold text-zinc-900 mt-1">
+            About Page Content
           </h2>
-          <p className="text-xs text-slate-500 mt-1">
-            Edit everything that appears on the About Us page: Institutional intro, Vision, Mission, and Core Values.
+          <p className="text-xs text-zinc-500 mt-0.5">
+            Edit institutional overview, Vision, Mission, and Core Values.
           </p>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2.5">
           <a
             href="/about"
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl border border-slate-300 text-xs font-semibold text-slate-700 hover:bg-slate-50 transition-colors"
+            className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg border border-zinc-200 text-xs font-medium text-zinc-700 hover:bg-zinc-50 transition-colors"
           >
             <ExternalLink className="w-3.5 h-3.5" />
-            <span>View Live Page</span>
+            <span>View Live</span>
           </a>
 
           <button
             onClick={handleReset}
-            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl border border-slate-300 text-xs font-semibold text-slate-600 hover:text-red-600 hover:border-red-200 hover:bg-red-50 transition-colors cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg border border-zinc-200 text-xs font-medium text-zinc-600 hover:text-zinc-900 hover:bg-zinc-50 transition-colors cursor-pointer"
           >
             <RotateCcw className="w-3.5 h-3.5" />
             <span>Reset</span>
@@ -95,31 +91,33 @@ export default function EditAboutPage() {
 
           <button
             onClick={handleSave}
-            className="inline-flex items-center gap-2 px-5 py-2 rounded-xl bg-[#1CA24B] hover:bg-[#16843c] text-white text-xs font-bold shadow-md shadow-[#1CA24B]/20 transition-all cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-zinc-900 hover:bg-zinc-800 text-white text-xs font-semibold shadow-xs transition-colors cursor-pointer"
           >
-            <Save className="w-4 h-4" />
-            <span>Save All Changes</span>
+            <Save className="w-3.5 h-3.5" />
+            <span>Save Changes</span>
           </button>
         </div>
       </div>
 
       {saveSuccess && (
-        <div className="p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-sm flex items-center gap-3 shadow-xs">
-          <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
-          <div className="font-semibold">About Page updated successfully!</div>
+        <div className="p-3.5 rounded-xl bg-zinc-100 border border-zinc-200 text-zinc-800 text-xs font-medium flex items-center gap-2.5">
+          <CheckCircle2 className="w-4 h-4 text-zinc-700 shrink-0" />
+          <span>About Page updated successfully.</span>
         </div>
       )}
 
       {/* Section 1: Page Header & Intro */}
-      <div className="bg-white p-6 rounded-2xl border border-slate-200 space-y-4">
-        <h3 className="text-base font-bold text-slate-900 flex items-center gap-2">
-          <Info className="w-4 h-4 text-[#1CA24B]" />
+      <div className="bg-white p-6 rounded-2xl border border-zinc-200 space-y-4">
+        <h3 className="text-sm font-bold text-zinc-900 flex items-center gap-2">
+          <Info className="w-4 h-4 text-zinc-600" />
           Header &amp; Institution Introduction
         </h3>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-xs font-semibold text-slate-700 mb-1">Badge Tag</label>
+            <label className="block text-xs font-semibold text-zinc-700 uppercase mb-1">
+              Top Small Badge
+            </label>
             <input
               type="text"
               value={formData.header?.badge || ''}
@@ -129,11 +127,14 @@ export default function EditAboutPage() {
                   header: { ...formData.header, badge: e.target.value },
                 })
               }
-              className="w-full px-3 py-2 border border-slate-300 rounded-lg text-xs"
+              className="w-full px-3 py-2 border border-zinc-200 rounded-lg text-xs"
             />
           </div>
+
           <div>
-            <label className="block text-xs font-semibold text-slate-700 mb-1">Main Heading Title</label>
+            <label className="block text-xs font-semibold text-zinc-700 uppercase mb-1">
+              Main Page Headline
+            </label>
             <input
               type="text"
               value={formData.header?.title || ''}
@@ -143,13 +144,15 @@ export default function EditAboutPage() {
                   header: { ...formData.header, title: e.target.value },
                 })
               }
-              className="w-full px-3 py-2 border border-slate-300 rounded-lg text-xs font-bold"
+              className="w-full px-3 py-2 border border-zinc-200 rounded-lg text-xs font-bold"
             />
           </div>
         </div>
 
         <div>
-          <label className="block text-xs font-semibold text-slate-700 mb-1">Introduction Paragraph</label>
+          <label className="block text-xs font-semibold text-zinc-700 uppercase mb-1">
+            Introductory Paragraph
+          </label>
           <textarea
             rows={3}
             value={formData.header?.description || ''}
@@ -159,24 +162,21 @@ export default function EditAboutPage() {
                 header: { ...formData.header, description: e.target.value },
               })
             }
-            className="w-full px-3 py-2 border border-slate-300 rounded-lg text-xs leading-relaxed"
+            className="w-full px-3 py-2 border border-zinc-200 rounded-lg text-xs leading-relaxed"
           />
         </div>
       </div>
 
       {/* Section 2: Vision & Mission */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* Vision Card */}
-        <div className="bg-white p-6 rounded-2xl border border-slate-200 space-y-4">
-          <div className="flex items-center gap-2 text-slate-900 font-bold text-sm">
-            <div className="w-8 h-8 rounded-lg bg-[#e8f7ee] text-[#1CA24B] flex items-center justify-center">
-              <Eye className="w-4 h-4" />
-            </div>
-            <span>Our Vision Card</span>
-          </div>
-
+        {/* Vision */}
+        <div className="bg-white p-6 rounded-2xl border border-zinc-200 space-y-4">
+          <h3 className="text-sm font-bold text-zinc-900 flex items-center gap-2">
+            <Target className="w-4 h-4 text-zinc-600" />
+            Our Vision Card
+          </h3>
           <div>
-            <label className="block text-xs font-semibold text-slate-700 mb-1">Vision Title</label>
+            <label className="block text-xs font-semibold text-zinc-700 uppercase mb-1">Vision Title</label>
             <input
               type="text"
               value={formData.vision?.title || ''}
@@ -186,12 +186,11 @@ export default function EditAboutPage() {
                   vision: { ...formData.vision, title: e.target.value },
                 })
               }
-              className="w-full px-3 py-2 border border-slate-300 rounded-lg text-xs font-bold"
+              className="w-full px-3 py-2 border border-zinc-200 rounded-lg text-xs font-bold"
             />
           </div>
-
           <div>
-            <label className="block text-xs font-semibold text-slate-700 mb-1">Vision Description</label>
+            <label className="block text-xs font-semibold text-zinc-700 uppercase mb-1">Vision Statement</label>
             <textarea
               rows={4}
               value={formData.vision?.description || ''}
@@ -201,22 +200,19 @@ export default function EditAboutPage() {
                   vision: { ...formData.vision, description: e.target.value },
                 })
               }
-              className="w-full px-3 py-2 border border-slate-300 rounded-lg text-xs leading-relaxed"
+              className="w-full px-3 py-2 border border-zinc-200 rounded-lg text-xs leading-relaxed"
             />
           </div>
         </div>
 
-        {/* Mission Card */}
-        <div className="bg-white p-6 rounded-2xl border border-slate-200 space-y-4">
-          <div className="flex items-center gap-2 text-slate-900 font-bold text-sm">
-            <div className="w-8 h-8 rounded-lg bg-[#e8f7ee] text-[#1CA24B] flex items-center justify-center">
-              <Target className="w-4 h-4" />
-            </div>
-            <span>Our Mission Card</span>
-          </div>
-
+        {/* Mission */}
+        <div className="bg-white p-6 rounded-2xl border border-zinc-200 space-y-4">
+          <h3 className="text-sm font-bold text-zinc-900 flex items-center gap-2">
+            <Target className="w-4 h-4 text-zinc-600" />
+            Our Mission Card
+          </h3>
           <div>
-            <label className="block text-xs font-semibold text-slate-700 mb-1">Mission Title</label>
+            <label className="block text-xs font-semibold text-zinc-700 uppercase mb-1">Mission Title</label>
             <input
               type="text"
               value={formData.mission?.title || ''}
@@ -226,12 +222,11 @@ export default function EditAboutPage() {
                   mission: { ...formData.mission, title: e.target.value },
                 })
               }
-              className="w-full px-3 py-2 border border-slate-300 rounded-lg text-xs font-bold"
+              className="w-full px-3 py-2 border border-zinc-200 rounded-lg text-xs font-bold"
             />
           </div>
-
           <div>
-            <label className="block text-xs font-semibold text-slate-700 mb-1">Mission Description</label>
+            <label className="block text-xs font-semibold text-zinc-700 uppercase mb-1">Mission Statement</label>
             <textarea
               rows={4}
               value={formData.mission?.description || ''}
@@ -241,86 +236,58 @@ export default function EditAboutPage() {
                   mission: { ...formData.mission, description: e.target.value },
                 })
               }
-              className="w-full px-3 py-2 border border-slate-300 rounded-lg text-xs leading-relaxed"
+              className="w-full px-3 py-2 border border-zinc-200 rounded-lg text-xs leading-relaxed"
             />
           </div>
         </div>
       </div>
 
-      {/* Section 3: Core Values */}
+      {/* Section 3: Core Values List */}
       <div className="space-y-4">
         <div className="flex items-center justify-between">
           <div>
-            <h3 className="text-lg font-bold text-slate-900">Institutional Core Values</h3>
-            <p className="text-xs text-slate-500">
-              Values presented in the 4-column cards grid on the public about page.
-            </p>
+            <h3 className="text-sm font-bold text-zinc-900">Institutional Core Values</h3>
+            <p className="text-xs text-zinc-500">Highlighted pillars displayed on the About page.</p>
           </div>
           <button
             onClick={addValue}
-            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#1CA24B] hover:bg-[#16843c] text-white text-xs font-bold shadow-xs cursor-pointer"
+            className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-zinc-900 text-white text-xs font-medium cursor-pointer"
           >
-            <Plus className="w-4 h-4" /> Add Core Value
+            <Plus className="w-3.5 h-3.5" /> Add Core Value
           </button>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {formData.coreValues?.map((val, i) => (
-            <div key={val.id || i} className="bg-white p-5 rounded-2xl border border-slate-200 relative group space-y-3">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {(formData.coreValues || []).map((val, i) => (
+            <div key={val.id || i} className="bg-white p-5 rounded-2xl border border-zinc-200 space-y-3 relative">
               <button
                 onClick={() => deleteValue(i)}
-                className="absolute top-4 right-4 text-slate-300 hover:text-red-500 cursor-pointer"
-                title="Remove value"
+                className="absolute top-4 right-4 text-zinc-400 hover:text-red-500 cursor-pointer"
               >
                 <Trash2 className="w-3.5 h-3.5" />
               </button>
-              <div className="flex items-center gap-2">
-                <span className="text-[10px] font-bold uppercase px-2 py-0.5 rounded bg-slate-100 text-slate-600">
-                  Value #{i + 1}
-                </span>
-              </div>
+
               <div>
-                <label className="block text-xs font-semibold text-slate-700 mb-1">Value Title</label>
+                <label className="block text-xs font-semibold text-zinc-700 uppercase mb-1">Value Title</label>
                 <input
                   type="text"
                   value={val.title}
                   onChange={(e) => handleValueChange(i, 'title', e.target.value)}
-                  className="w-full px-3 py-1.5 border border-slate-300 rounded-lg text-sm font-bold text-slate-900"
+                  className="w-full px-3 py-2 border border-zinc-200 rounded-lg text-xs font-bold"
                 />
               </div>
+
               <div>
-                <label className="block text-xs font-semibold text-slate-700 mb-1">Description</label>
+                <label className="block text-xs font-semibold text-zinc-700 uppercase mb-1">Description</label>
                 <textarea
-                  rows={3}
+                  rows={2}
                   value={val.desc}
                   onChange={(e) => handleValueChange(i, 'desc', e.target.value)}
-                  className="w-full px-3 py-1.5 border border-slate-300 rounded-lg text-xs text-slate-600 leading-normal"
+                  className="w-full px-3 py-2 border border-zinc-200 rounded-lg text-xs text-zinc-600"
                 />
               </div>
             </div>
           ))}
-        </div>
-      </div>
-
-      {/* Floating Save Bar */}
-      <div className="sticky bottom-6 bg-slate-900 text-white p-4 rounded-2xl shadow-xl flex items-center justify-between z-20">
-        <div className="text-xs text-slate-300 flex items-center gap-2">
-          <span className="w-2 h-2 rounded-full bg-[#1CA24B] animate-pulse"></span>
-          <span>Editing About Us Page CMS</span>
-        </div>
-        <div className="flex items-center gap-3">
-          <button
-            onClick={handleReset}
-            className="text-xs text-slate-400 hover:text-white px-3 py-1.5 transition-colors cursor-pointer"
-          >
-            Reset
-          </button>
-          <button
-            onClick={handleSave}
-            className="inline-flex items-center gap-2 px-5 py-2 rounded-xl bg-[#1CA24B] hover:bg-[#16843c] text-white text-xs font-bold transition-all cursor-pointer shadow-md shadow-[#1CA24B]/30"
-          >
-            <Save className="w-4 h-4" /> Save Changes
-          </button>
         </div>
       </div>
     </div>

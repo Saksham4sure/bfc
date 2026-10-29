@@ -5,6 +5,7 @@ import { COLLEGE_INFO } from '../utils/constants'
 // Initial defaults for all pages
 export const DEFAULT_PAGE_DATA = {
   home: {
+    heroSliderTheme: 'awwwards-cinematic',
     heroSlides: [
       {
         id: 's-1',

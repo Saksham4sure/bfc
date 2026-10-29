@@ -17,49 +17,109 @@
 body {
   margin: 0;
   padding: 0;
-  background-color: #fafafa;
-  color: #1e293b;
+  background-color: #ffffff;
+  color: #0f172a;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Minimalist Swiper Controls */
-.swiper-button-prev,
-.swiper-button-next {
-  color: #ffffff !important;
-  background-color: rgba(15, 23, 42, 0.45);
-  width: 40px !important;
-  height: 40px !important;
-  border-radius: 9999px;
-  backdrop-filter: blur(4px);
-  transition: all 0.2s ease;
-  border: 1px solid rgba(255, 255, 255, 0.15);
+/* -------------------------------------------------------------
+ * Awwwards-Inspired Smooth Slider Animations & Transitions
+ * ------------------------------------------------------------- */
+
+@keyframes kenBurnsSlow {
+  0% {
+    transform: scale(1.0);
+  }
+  100% {
+    transform: scale(1.08);
+  }
 }
 
-.swiper-button-prev:after,
-.swiper-button-next:after {
-  font-size: 15px !important;
-  font-weight: 600;
+@keyframes awwwardsRevealUp {
+  0% {
+    opacity: 0;
+    transform: translateY(22px);
+    filter: blur(4px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
 }
 
-.swiper-button-prev:hover,
-.swiper-button-next:hover {
-  background-color: #1CA24B !important;
-  border-color: #1CA24B !important;
+@keyframes awwwardsBadgePop {
+  0% {
+    opacity: 0;
+    transform: scale(0.92) translateY(6px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
 }
 
+@keyframes awwwardsProgressFill {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+/* Active Slide Transitions */
+.swiper-slide-active .awwwards-zoom-bg {
+  animation: kenBurnsSlow 9s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+.swiper-slide-active .awwwards-animate-badge {
+  animation: awwwardsBadgePop 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both;
+}
+
+.swiper-slide-active .awwwards-animate-title {
+  animation: awwwardsRevealUp 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.25s both;
+}
+
+.swiper-slide-active .awwwards-animate-sub {
+  animation: awwwardsRevealUp 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both;
+}
+
+.swiper-slide-active .awwwards-animate-actions {
+  animation: awwwardsRevealUp 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.55s both;
+}
+
+/* Clean Minimal Swiper Controls */
 .swiper-pagination-bullet {
   background-color: #ffffff !important;
-  opacity: 0.5;
-  width: 8px !important;
-  height: 8px !important;
-  transition: all 0.25s ease;
+  opacity: 0.35;
+  width: 6px !important;
+  height: 6px !important;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: 9999px !important;
 }
 
 .swiper-pagination-bullet-active {
-  background-color: #1CA24B !important;
+  background-color: #ffffff !important;
   opacity: 1 !important;
-  width: 22px !important;
-  border-radius: 4px !important;
+  width: 24px !important;
+  border-radius: 9999px !important;
+}
+
+/* Minimal Custom Scrollbar for Preview Frames */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.3);
+  border-radius: 9999px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.5);
 }

@@ -31,14 +31,12 @@ export default function EditAcademicsPage() {
     }
   }
 
-  // Update program fields
   const handleProgramChange = (index, field, value) => {
     const updated = [...(formData.programs || [])]
     updated[index] = { ...updated[index], [field]: value }
     setFormData({ ...formData, programs: updated })
   }
 
-  // Update feature bullet inside a program
   const handleFeatureChange = (progIndex, featureIndex, value) => {
     const updated = [...(formData.programs || [])]
     const features = [...(updated[progIndex].features || [])]
@@ -49,7 +47,7 @@ export default function EditAcademicsPage() {
 
   const addFeature = (progIndex) => {
     const updated = [...(formData.programs || [])]
-    const features = [...(updated[progIndex].features || []), 'New course practical or laboratory feature']
+    const features = [...(updated[progIndex].features || []), 'New curriculum lab or course highlight']
     updated[progIndex] = { ...updated[progIndex], features }
     setFormData({ ...formData, programs: updated })
   }
@@ -68,7 +66,7 @@ export default function EditAcademicsPage() {
         id: `prog-${Date.now()}`,
         level: 'New Academic Program',
         description: 'Comprehensive curriculum designed for future career pathways and professional development.',
-        features: ['Experienced faculty and state-of-the-art facilities', 'Practical industry workshops'],
+        features: ['Experienced faculty mentors', 'Practical industry workshops'],
       },
     ]
     setFormData({ ...formData, programs: updated })
@@ -84,40 +82,37 @@ export default function EditAcademicsPage() {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 max-w-5xl">
       {/* Page Header Bar */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-6 rounded-2xl border border-slate-200 shadow-2xs">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-5 sm:p-6 rounded-2xl border border-zinc-200">
         <div>
-          <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#1CA24B]">
+          <div className="flex items-center gap-2 text-xs font-mono font-medium uppercase tracking-wider text-zinc-500">
             <span>Page CMS</span>
             <span>&bull;</span>
             <span>Academics</span>
           </div>
-          <h2 className="text-2xl font-extrabold text-slate-900 mt-1 flex items-center gap-2">
-            <span>Academics Page Content</span>
-            <span className="text-xs px-2.5 py-0.5 rounded-full bg-emerald-100 text-[#1CA24B] font-bold">
-              /academics
-            </span>
+          <h2 className="text-xl sm:text-2xl font-bold text-zinc-900 mt-1">
+            Academic Programs Content
           </h2>
-          <p className="text-xs text-slate-500 mt-1">
-            Edit everything that appears on the Academics page: Header banner and all offered academic streams and highlights.
+          <p className="text-xs text-zinc-500 mt-0.5">
+            Configure School level and +2 Science, Management &amp; Humanities programs.
           </p>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2.5">
           <a
             href="/academics"
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl border border-slate-300 text-xs font-semibold text-slate-700 hover:bg-slate-50 transition-colors"
+            className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg border border-zinc-200 text-xs font-medium text-zinc-700 hover:bg-zinc-50 transition-colors"
           >
             <ExternalLink className="w-3.5 h-3.5" />
-            <span>View Live Page</span>
+            <span>View Live</span>
           </a>
 
           <button
             onClick={handleReset}
-            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl border border-slate-300 text-xs font-semibold text-slate-600 hover:text-red-600 hover:border-red-200 hover:bg-red-50 transition-colors cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg border border-zinc-200 text-xs font-medium text-zinc-600 hover:text-zinc-900 hover:bg-zinc-50 transition-colors cursor-pointer"
           >
             <RotateCcw className="w-3.5 h-3.5" />
             <span>Reset</span>
@@ -125,31 +120,31 @@ export default function EditAcademicsPage() {
 
           <button
             onClick={handleSave}
-            className="inline-flex items-center gap-2 px-5 py-2 rounded-xl bg-[#1CA24B] hover:bg-[#16843c] text-white text-xs font-bold shadow-md shadow-[#1CA24B]/20 transition-all cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-zinc-900 hover:bg-zinc-800 text-white text-xs font-semibold shadow-xs transition-colors cursor-pointer"
           >
-            <Save className="w-4 h-4" />
-            <span>Save All Changes</span>
+            <Save className="w-3.5 h-3.5" />
+            <span>Save Changes</span>
           </button>
         </div>
       </div>
 
       {saveSuccess && (
-        <div className="p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-sm flex items-center gap-3 shadow-xs">
-          <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
-          <div className="font-semibold">Academics Page updated successfully!</div>
+        <div className="p-3.5 rounded-xl bg-zinc-100 border border-zinc-200 text-zinc-800 text-xs font-medium flex items-center gap-2.5">
+          <CheckCircle2 className="w-4 h-4 text-zinc-700 shrink-0" />
+          <span>Academic programs updated successfully.</span>
         </div>
       )}
 
-      {/* Header Intro */}
-      <div className="bg-white p-6 rounded-2xl border border-slate-200 space-y-4">
-        <h3 className="text-base font-bold text-slate-900 flex items-center gap-2">
-          <GraduationCap className="w-4 h-4 text-[#1CA24B]" />
-          Academics Page Header
+      {/* Header Info */}
+      <div className="bg-white p-6 rounded-2xl border border-zinc-200 space-y-4">
+        <h3 className="text-sm font-bold text-zinc-900 flex items-center gap-2">
+          <GraduationCap className="w-4 h-4 text-zinc-600" />
+          Header Configuration
         </h3>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-xs font-semibold text-slate-700 mb-1">Badge Tag</label>
+            <label className="block text-xs font-semibold text-zinc-700 uppercase mb-1">Badge</label>
             <input
               type="text"
               value={formData.header?.badge || ''}
@@ -159,11 +154,11 @@ export default function EditAcademicsPage() {
                   header: { ...formData.header, badge: e.target.value },
                 })
               }
-              className="w-full px-3 py-2 border border-slate-300 rounded-lg text-xs"
+              className="w-full px-3 py-2 border border-zinc-200 rounded-lg text-xs"
             />
           </div>
           <div>
-            <label className="block text-xs font-semibold text-slate-700 mb-1">Page Headline Title</label>
+            <label className="block text-xs font-semibold text-zinc-700 uppercase mb-1">Headline Title</label>
             <input
               type="text"
               value={formData.header?.title || ''}
@@ -173,13 +168,13 @@ export default function EditAcademicsPage() {
                   header: { ...formData.header, title: e.target.value },
                 })
               }
-              className="w-full px-3 py-2 border border-slate-300 rounded-lg text-xs font-bold"
+              className="w-full px-3 py-2 border border-zinc-200 rounded-lg text-xs font-bold"
             />
           </div>
         </div>
 
         <div>
-          <label className="block text-xs font-semibold text-slate-700 mb-1">Subtitle / Overview</label>
+          <label className="block text-xs font-semibold text-zinc-700 uppercase mb-1">Description</label>
           <textarea
             rows={2}
             value={formData.header?.description || ''}
@@ -189,95 +184,87 @@ export default function EditAcademicsPage() {
                 header: { ...formData.header, description: e.target.value },
               })
             }
-            className="w-full px-3 py-2 border border-slate-300 rounded-lg text-xs"
+            className="w-full px-3 py-2 border border-zinc-200 rounded-lg text-xs"
           />
         </div>
       </div>
 
-      {/* Academic Streams Manager */}
+      {/* Programs List */}
       <div className="space-y-4">
         <div className="flex items-center justify-between">
-          <div>
-            <h3 className="text-lg font-bold text-slate-900">Academic Programs &amp; Streams</h3>
-            <p className="text-xs text-slate-500">
-              Manage the 2-column program cards shown on the academics page.
-            </p>
-          </div>
+          <h3 className="text-sm font-bold text-zinc-900">Academic Programs List</h3>
           <button
             onClick={addProgram}
-            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#1CA24B] hover:bg-[#16843c] text-white text-xs font-bold shadow-xs cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-900 text-white text-xs font-semibold cursor-pointer"
           >
-            <Plus className="w-4 h-4" /> Add Program
+            <Plus className="w-3.5 h-3.5" /> Add Program
           </button>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {formData.programs?.map((prog, pIdx) => (
-            <div key={prog.id || pIdx} className="bg-white p-6 rounded-2xl border border-slate-200 relative space-y-4 shadow-xs">
-              <button
-                onClick={() => deleteProgram(pIdx)}
-                className="absolute top-5 right-5 text-slate-300 hover:text-red-500 cursor-pointer"
-                title="Remove program"
-              >
-                <Trash2 className="w-4 h-4" />
-              </button>
-
-              <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-lg bg-[#e8f7ee] text-[#1CA24B] flex items-center justify-center">
-                  <BookOpen className="w-4 h-4" />
-                </div>
-                <span className="text-xs font-bold text-slate-400 uppercase">Program #{pIdx + 1}</span>
+        <div className="space-y-4">
+          {(formData.programs || []).map((prog, index) => (
+            <div key={prog.id || index} className="bg-white p-5 rounded-2xl border border-zinc-200 space-y-4 relative">
+              <div className="flex items-center justify-between pb-2 border-b border-zinc-100">
+                <span className="text-[10px] font-mono font-bold uppercase px-2 py-0.5 rounded bg-zinc-100 text-zinc-700">
+                  Program #{index + 1}
+                </span>
+                <button
+                  onClick={() => deleteProgram(index)}
+                  className="p-1 text-zinc-400 hover:text-red-600 cursor-pointer"
+                  title="Delete program"
+                >
+                  <Trash2 className="w-3.5 h-3.5" />
+                </button>
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-700 mb-1">Program Name / Level</label>
+                <label className="block text-xs font-semibold text-zinc-700 uppercase mb-1">
+                  Program Name / Stream Level
+                </label>
                 <input
                   type="text"
                   value={prog.level}
-                  onChange={(e) => handleProgramChange(pIdx, 'level', e.target.value)}
-                  className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm font-bold text-slate-900"
+                  onChange={(e) => handleProgramChange(index, 'level', e.target.value)}
+                  className="w-full px-3 py-2 border border-zinc-200 rounded-lg text-sm font-bold text-zinc-900"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-700 mb-1">Description</label>
+                <label className="block text-xs font-semibold text-zinc-700 uppercase mb-1">
+                  Description
+                </label>
                 <textarea
-                  rows={3}
+                  rows={2}
                   value={prog.description}
-                  onChange={(e) => handleProgramChange(pIdx, 'description', e.target.value)}
-                  className="w-full px-3 py-2 border border-slate-300 rounded-lg text-xs text-slate-600 leading-relaxed"
+                  onChange={(e) => handleProgramChange(index, 'description', e.target.value)}
+                  className="w-full px-3 py-2 border border-zinc-200 rounded-lg text-xs text-zinc-600 leading-relaxed"
                 />
               </div>
 
-              {/* Program Features / Highlights list */}
               <div>
                 <div className="flex items-center justify-between mb-2">
-                  <label className="text-xs font-semibold text-slate-700 uppercase tracking-wider">
-                    Key Highlights
-                  </label>
+                  <span className="text-xs font-semibold uppercase text-zinc-700">Course Highlights</span>
                   <button
-                    type="button"
-                    onClick={() => addFeature(pIdx)}
-                    className="text-[11px] font-bold text-[#1CA24B] hover:underline cursor-pointer"
+                    onClick={() => addFeature(index)}
+                    className="text-xs text-zinc-600 hover:text-zinc-900 font-medium flex items-center gap-1 cursor-pointer"
                   >
-                    + Add Highlight
+                    <Plus className="w-3 h-3" /> Add Feature
                   </button>
                 </div>
 
                 <div className="space-y-2">
-                  {prog.features?.map((feat, fIdx) => (
+                  {(prog.features || []).map((feat, fIdx) => (
                     <div key={fIdx} className="flex items-center gap-2">
-                      <Check className="w-3.5 h-3.5 text-[#1CA24B] shrink-0" />
+                      <span className="w-1.5 h-1.5 rounded-full bg-zinc-400 shrink-0"></span>
                       <input
                         type="text"
                         value={feat}
-                        onChange={(e) => handleFeatureChange(pIdx, fIdx, e.target.value)}
-                        className="grow px-2.5 py-1.5 border border-slate-200 rounded-lg text-xs text-slate-700 focus:outline-none focus:border-[#1CA24B]"
+                        onChange={(e) => handleFeatureChange(index, fIdx, e.target.value)}
+                        className="grow px-3 py-1.5 border border-zinc-200 rounded-lg text-xs text-zinc-700"
                       />
                       <button
-                        type="button"
-                        onClick={() => deleteFeature(pIdx, fIdx)}
-                        className="p-1 text-slate-300 hover:text-red-500 cursor-pointer"
+                        onClick={() => deleteFeature(index, fIdx)}
+                        className="p-1 text-zinc-400 hover:text-red-500 cursor-pointer"
                       >
                         <X className="w-3.5 h-3.5" />
                       </button>
@@ -287,28 +274,6 @@ export default function EditAcademicsPage() {
               </div>
             </div>
           ))}
-        </div>
-      </div>
-
-      {/* Floating Save Bar */}
-      <div className="sticky bottom-6 bg-slate-900 text-white p-4 rounded-2xl shadow-xl flex items-center justify-between z-20">
-        <div className="text-xs text-slate-300 flex items-center gap-2">
-          <span className="w-2 h-2 rounded-full bg-[#1CA24B] animate-pulse"></span>
-          <span>Editing Academics Page CMS</span>
-        </div>
-        <div className="flex items-center gap-3">
-          <button
-            onClick={handleReset}
-            className="text-xs text-slate-400 hover:text-white px-3 py-1.5 transition-colors cursor-pointer"
-          >
-            Reset
-          </button>
-          <button
-            onClick={handleSave}
-            className="inline-flex items-center gap-2 px-5 py-2 rounded-xl bg-[#1CA24B] hover:bg-[#16843c] text-white text-xs font-bold transition-all cursor-pointer shadow-md shadow-[#1CA24B]/30"
-          >
-            <Save className="w-4 h-4" /> Save Changes
-          </button>
         </div>
       </div>
     </div>
